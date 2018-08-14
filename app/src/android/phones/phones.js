@@ -51,13 +51,12 @@ class Phones extends Component {
             positionY: 0,
 			searchQuery: ''
         });
-		
-        fetch(appConfig.url + 'api/items/get', {
+
+        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': appConfig.access_token
+                'Content-Type': 'application/json'
             }
         })
             .then((response) => response.json())
@@ -71,7 +70,7 @@ class Phones extends Component {
 					refreshing: false
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     serverError: true
                 });
@@ -84,7 +83,7 @@ class Phones extends Component {
     }
 
     sort(a, b) {
-        let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        let nameA = a.first_name.toLowerCase(), nameB = b.first_name.toLowerCase();
         if (nameA < nameB) {
             return -1
         }
@@ -115,7 +114,7 @@ class Phones extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.name} - {rowData.phone}
+                        {rowData.first_name} - {rowData.email}
                     </Text>
                 </View>
             </TouchableHighlight>
@@ -151,7 +150,7 @@ class Phones extends Component {
         }
 
         let arr = [].concat(this.state.responseData);
-        let items = arr.filter((el) => el.phone.toLowerCase().indexOf(text.toLowerCase()) !== -1);
+        let items = arr.filter((el) => el.first_name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -229,7 +228,7 @@ class Phones extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Phones
+                                    Customers
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -238,10 +237,10 @@ class Phones extends Component {
 						<TouchableHighlight
 							onPress={()=> this.goSearch()}
 							underlayColor='darkblue'
-						>						
+						>
                             <View>
                                 <Text style={styles.textSmall}>
-                                    Search
+                                    New
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -274,11 +273,11 @@ class Phones extends Component {
 						marginLeft: -10,
 						paddingLeft: 5,
 						width: this.state.width * .10,
-					}}>			
+					}}>
 						<TouchableWithoutFeedback
 							onPress={() => this.clearSearchQuery()}
-						>			
-							<View>					
+						>
+							<View>
 								{image}
 							</View>
 						</TouchableWithoutFeedback>

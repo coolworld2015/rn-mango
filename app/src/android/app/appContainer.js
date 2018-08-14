@@ -29,8 +29,8 @@ class AppContainer extends Component {
  					underlineStyle={{backgroundColor: 'darkblue'}}
 					backgroundColor='white'/>}
             >
-                <PhonesTab tabLabel="Phones"/>
-                <UsersTab tabLabel="Users"/>
+                <PhonesTab tabLabel="Customers"/>
+                <UsersTab tabLabel="Balance"/>
                 <Logout tabLabel="Logout"/>
             </ScrollableTabView>
         );
@@ -53,7 +53,7 @@ class PhonesTab extends Component {
     constructor(props) {
         super(props);
         this.routes = [
-            {title: 'Phones', index: 0},
+            {title: 'Customers', index: 0},
             {title: 'Phones Details', index: 1}
         ];
     }
