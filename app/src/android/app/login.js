@@ -19,8 +19,8 @@ class Login extends Component {
 
         this.state = {
             showProgress: false,
-            //username: '1',
-            //password: '1',
+            username: 'test',
+            password: '111',
             bugANDROID: ''
         }
     }
@@ -46,14 +46,11 @@ class Login extends Component {
             bugANDROID: ' '
         });
 
-        var url = appConfig.url;
-
-        fetch(appConfig.url + 'api/login', {
+        fetch(window.appConfig.url + 'Customers/login', {
             method: 'post',
             body: JSON.stringify({
-                name: this.state.username,
-                pass: this.state.password,
-                description: 'Android'
+                username: this.state.username,
+                password: this.state.password
             }),
             headers: {
                 'Accept': 'application/json',
@@ -62,8 +59,8 @@ class Login extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.token) {
-                    appConfig.access_token = responseData.token;
+                if (responseData.id) {
+                    appConfig.access_token = responseData.id;
                     this.setState({
                         badCredentials: false
                     });
@@ -75,7 +72,7 @@ class Login extends Component {
                     });
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     badCredentials: true,
                     showProgress: false
@@ -101,11 +98,11 @@ class Login extends Component {
                             RN-Base
                         </Text>
                     </View>
-					
+
 					<Image style={styles.logo}
                            source={require('../../../img/logo.jpg')}
                     />
-					
+
                     <TextInput
                         underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text) => this.setState({
