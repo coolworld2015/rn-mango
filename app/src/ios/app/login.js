@@ -37,8 +37,7 @@ class Login extends Component {
             showProgress: true
         });
 
-        //fetch(window.appConfig.url + 'api/login', {
-        fetch('http://94.130.206.254/api/Customers/login', {
+        fetch(window.appConfig.url + 'Customers/login', {
             method: 'post',
             body: JSON.stringify({
                 username: this.state.username,
@@ -51,7 +50,6 @@ class Login extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData.id)
                 if (responseData.id) {
                     appConfig.access_token = responseData.id;
                     this.setState({
@@ -67,8 +65,7 @@ class Login extends Component {
                     });
                 }
             })
-            .catch((error) => {
-                console.log(error)
+            .catch(() => {
                 this.setState({
                     badCredentials: true,
                     showProgress: false
@@ -138,17 +135,6 @@ class Login extends Component {
                 </View>
             </ScrollView>
         )
-    }
-
-    onLoginPressed() {
-        if (this.state.username === undefined || this.state.username === '' ||
-            this.state.password === undefined || this.state.password === '') {
-            this.setState({
-                badCredentials: true
-            });
-            return;
-        }
-        this.props.onLogin();
     }
 }
 

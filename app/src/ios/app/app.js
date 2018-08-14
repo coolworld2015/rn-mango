@@ -17,7 +17,7 @@ class App extends Component {
 
         window.appConfig = {
             access_token: '',
-            url: 'http://jwt-base.herokuapp.com/',
+            url: 'http://94.130.206.254/api/',
             onLogOut: this.onLogOut.bind(this),
             search: {
                 refresh: true,

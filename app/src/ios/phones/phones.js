@@ -51,8 +51,7 @@ class Phones extends Component {
             searchQuery: ''
         });
 
-        //fetch(appConfig.url + 'api/items/get', {
-        fetch('http://94.130.206.254/api/Customers?access_token='  + appConfig.access_token, {
+        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -61,7 +60,6 @@ class Phones extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData)
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 15)),
                     resultsCount: responseData.length,
@@ -69,7 +67,7 @@ class Phones extends Component {
                     filteredItems: responseData
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     serverError: true
                 });
