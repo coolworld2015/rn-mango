@@ -159,12 +159,12 @@ class Users extends Component {
     renderRow(rowData) {
         return (
             <TouchableHighlight
-                onPress={() => this.showDetails(rowData)}
+                //onPress={() => this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.balance}
+                        {((+rowData.balance).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
                     </Text>
                 </View>
             </TouchableHighlight>
