@@ -53,8 +53,7 @@ class Users extends Component {
     }
 
     getItems() {
-        //fetch(appConfig.url + 'api/users/get', {
-        fetch('http://94.130.206.254/api/Customers/getbalance?access_token=' + appConfig.access_token, {
+        fetch(appConfig.url + 'Customers/getbalance?access_token=' + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -65,12 +64,12 @@ class Users extends Component {
             .then((responseData) => {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData),
-                    resultsCount: responseData.length,
+                    resultsCount: 1,
                     responseData: responseData,
                     filteredItems: [].concat(responseData)
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     serverError: true
                 });
@@ -215,7 +214,7 @@ class Users extends Component {
         }
 
         let arr = [].concat(this.state.responseData);
-        let items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
+        let items = arr.filter((el) => el.id.toLowerCase().indexOf(text.toLowerCase()) !== -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -260,7 +259,7 @@ class Users extends Component {
                 <View style={styles.search}>
                     <TextInput
                         style={styles.textInput}
-                        onChangeText={this.onChangeText.bind(this)}
+                        //onChangeText={this.onChangeText.bind(this)}
                         value={this.state.searchQuery}
                         placeholder="Search here">
                     </TextInput>

@@ -64,26 +64,25 @@ class Users extends Component {
             positionY: 0,
 			searchQuery: ''
         });
-		
-        fetch(appConfig.url + 'api/users/get', {
+
+        fetch(appConfig.url + 'Customers/getbalance?access_token=' + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': appConfig.access_token
             }
         })
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 15)),
-                    resultsCount: responseData.length,
+                    dataSource: this.state.dataSource.cloneWithRows(responseData),
+                    resultsCount: 1,
                     responseData: responseData,
-                    filteredItems: responseData,
+                    filteredItems: [].concat(responseData),
 					refreshing: false
                 });
             })
-            .catch((error) => {
+            .catch(() => {
                 this.setState({
                     serverError: true
                 });
@@ -96,7 +95,7 @@ class Users extends Component {
     }
 
     sort(a, b) {
-        let nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        let nameA = a.id.toLowerCase(), nameB = b.id.toLowerCase();
         if (nameA < nameB) {
             return -1
         }
@@ -127,7 +126,7 @@ class Users extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.name}
+                        {rowData.balance}
                     </Text>
                 </View>
             </TouchableHighlight>
@@ -163,7 +162,7 @@ class Users extends Component {
         }
 
         let arr = [].concat(this.state.responseData);
-        let items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
+        let items = arr.filter((el) => el.id.toLowerCase().indexOf(text.toLowerCase()) !== -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -241,19 +240,19 @@ class Users extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Users
+                                    Balance
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View>
 						<TouchableHighlight
-							onPress={()=> this.addItem()}
+							//onPress={()=> this.addItem()}
 							underlayColor='darkblue'
 						>
                             <View>
                                 <Text style={styles.textSmall}>
-                                    New
+
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -264,7 +263,7 @@ class Users extends Component {
 					<View>
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={this.onChangeText.bind(this)}
+							//onChangeText={this.onChangeText.bind(this)}
 							style={{
 								height: 45,
 								padding: 5,
@@ -286,11 +285,11 @@ class Users extends Component {
 						marginLeft: -10,
 						paddingLeft: 5,
 						width: this.state.width * .10,
-					}}>			
+					}}>
 						<TouchableWithoutFeedback
 							onPress={() => this.clearSearchQuery()}
-						>			
-							<View>					
+						>
+							<View>
 								{image}
 							</View>
 						</TouchableWithoutFeedback>
@@ -360,6 +359,7 @@ const styles = StyleSheet.create({
         margin: 10,
         marginTop: 12,
         paddingLeft: 20,
+        marginLeft: -10,
         fontWeight: 'bold',
         color: 'white'
     },
