@@ -95,12 +95,12 @@ class Login extends Component {
 
                     <View style={styles.headerContainer}>
                         <Text style={styles.heading}>
-                            RN-Base
+                            Mangosoft-Demo
                         </Text>
                     </View>
 
 					<Image style={styles.logo}
-                           source={require('../../../img/logo.jpg')}
+                           source={require('../../../img/logo.png')}
                     />
 
                     <TextInput
@@ -184,8 +184,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logo: {
-        width: 150,
-        height: 150,
+        width: 330,
+        height: 10,
         paddingTop: 140,
         borderRadius: 20,
 		marginBottom: 10
