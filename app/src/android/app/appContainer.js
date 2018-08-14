@@ -29,8 +29,8 @@ class AppContainer extends Component {
  					underlineStyle={{backgroundColor: 'darkblue'}}
 					backgroundColor='white'/>}
             >
-                <PhonesTab tabLabel="Customers"/>
                 <UsersTab tabLabel="Balance"/>
+                <PhonesTab tabLabel="Customers"/>
                 <Logout tabLabel="Logout"/>
             </ScrollableTabView>
         );

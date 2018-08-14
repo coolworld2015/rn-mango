@@ -16,7 +16,7 @@ class AppContainer extends Component {
         super(props);
 
         this.state = {
-            selectedTab: 'Phones'
+            selectedTab: 'Users'
         };
     }
 
@@ -27,6 +27,24 @@ class AppContainer extends Component {
     render() {
         return (
             <TabBarIOS>
+
+                <TabBarIOS.Item
+                    title="Balance"
+                    icon={require('../../../img/campaigns.png')}
+                    selected={this.state.selectedTab === 'Users'}
+                    onPress={() => this.setState({selectedTab: 'Users'})}>
+
+                    <NavigatorIOS
+                        style={{
+                            flex: 1
+                        }}
+                        initialRoute={{
+                            component: Users,
+                            title: 'Balance',
+                            rightButtonTitle: 'New'
+                        }}
+                    />
+                </TabBarIOS.Item>
 
                 <TabBarIOS.Item
                     title="Customers"
@@ -45,31 +63,6 @@ class AppContainer extends Component {
                             rightButtonTitle: 'New',
                             onRightButtonPress: () => {
                                 this.refs.customers.navigator.push({
-                                    title: "New record",
-                                    component: UserAdd
-                                });
-                            }
-                        }}
-                    />
-                </TabBarIOS.Item>
-
-                <TabBarIOS.Item
-                    title="Balance"
-                    icon={require('../../../img/campaigns.png')}
-                    selected={this.state.selectedTab === 'Users'}
-                    onPress={() => this.setState({selectedTab: 'Users'})}>
-
-                    <NavigatorIOS
-                        style={{
-                            flex: 1
-                        }}
-                        ref="users"
-                        initialRoute={{
-                            component: Users,
-                            title: 'Balance',
-                            rightButtonTitle: 'New',
-                            onRightButtonPress: () => {
-                                this.refs.users.navigator.push({
                                     title: "New record",
                                     component: UserAdd
                                 });
