@@ -168,10 +168,6 @@ class Customers extends Component {
         this.getItems();
     }
 
-    goBack() {
-        this.props.navigator.pop();
-    }
-
     clearSearchQuery() {
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.state.responseData.slice(0, 15)),
