@@ -100,12 +100,6 @@ class Customers extends Component {
         });
     }
 
-    goSearch() {
-        this.props.navigator.push({
-            index: 2
-        });
-    }
-
     renderRow(rowData) {
         return (
             <TouchableHighlight

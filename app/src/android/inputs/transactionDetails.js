@@ -27,14 +27,15 @@ class TransactionDetails extends Component {
         };
 
         if (props.data) {
+
             this.state = {
                 id: props.data.id,
-                name: props.data.name,
-                phone: props.data.phone,
-                street: props.data.street,
-                house: props.data.house,
-                apt: props.data.apt,
-                index: props.data.index
+                first_name: props.data.to.first_name,
+                last_name: props.data.to.last_name,
+                username: props.data.to.username,
+                email: props.data.to.email,
+                amount: (+props.data.value).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+                date: props.data.date.split('T')[0] + ' ' + props.data.date.split('T')[1].split('.')[0]
             };
         }
     }
@@ -63,7 +64,7 @@ class TransactionDetails extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    {this.state.name}
+                                    {this.state.first_name}
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -82,66 +83,66 @@ class TransactionDetails extends Component {
                     <View style={styles.form}>
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Name:
+                                Amount:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.name}
+                                    {this.state.amount}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Phone:
+                                Date:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.phone}
+                                    {this.state.date}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Street:
+                                First name:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.street}
+                                    {this.state.first_name}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                House:
+                                Last name:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.house}
+                                    {this.state.last_name}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Apt:
+                                Username:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.apt}
+                                    {this.state.username}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Zip:
+                                E-mail:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.index}
+                                    {this.state.email}
                                 </Text>
                             </View>
                         </View>
