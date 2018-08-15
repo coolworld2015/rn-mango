@@ -95,7 +95,7 @@ class Login extends Component {
 
                     <View style={styles.headerContainer}>
                         <Text style={styles.heading}>
-                            Mangosoft-Demo
+                            ValueCoin-Demo
                         </Text>
                     </View>
 
