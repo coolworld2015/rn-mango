@@ -10,11 +10,10 @@ import {
     ScrollView,
     ActivityIndicator,
     TextInput,
-    BackAndroid,
-    Alert
+    BackAndroid
 } from 'react-native';
 
-class UserDetails extends Component {
+class SentTransfer extends Component {
     constructor(props) {
         super(props);
 
@@ -26,21 +25,12 @@ class UserDetails extends Component {
         });
 
         this.state = {
-            serverError: false
-        };
-
-        if (props.data) {
-            this.state = {
-                id: props.data.id,
-                name: props.data.name,
-                pass: props.data.pass,
-                description: props.data.description,
-                showProgress: false
-            };
+            showProgress: false,
+            bugANDROID: ''
         }
     }
 
-    updateItem() {
+    addItem() {
         if (this.state.name === undefined || this.state.name === '' ||
             this.state.pass === undefined || this.state.pass === '' ||
             this.state.description === undefined || this.state.description === '') {
@@ -55,10 +45,10 @@ class UserDetails extends Component {
             bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/users/update', {
+        fetch(appConfig.url + 'api/users/add', {
             method: 'post',
             body: JSON.stringify({
-                id: this.state.id,
+                id: +new Date,
                 name: this.state.name,
                 pass: this.state.pass,
                 description: this.state.description,
@@ -71,14 +61,8 @@ class UserDetails extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                if (responseData.pass) {
-                    appConfig.users.refresh = true;
-                    this.props.navigator.pop();
-                } else {
-                    this.setState({
-                        badCredentials: true
-                    });
-                }
+                appConfig.users.refresh = true;
+                this.props.navigator.pop();
             })
             .catch((error) => {
                 this.setState({
@@ -90,62 +74,6 @@ class UserDetails extends Component {
                     showProgress: false
                 });
             });
-    }
-
-    deleteItemDialog() {
-        Alert.alert(
-            'Delete record',
-            'Are you sure you want to delete ' + this.state.name + '?',
-            [
-                {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                {
-                    text: 'OK', onPress: () => {
-                    this.deleteItem();
-                }
-                },
-            ]
-        );
-    }
-
-    deleteItem() {
-        this.setState({
-            showProgress: true,
-            bugANDROID: ' '
-        });
-
-        fetch(appConfig.url + 'api/users/delete', {
-            method: 'post',
-            body: JSON.stringify({
-                id: this.state.id,
-                authorization: appConfig.access_token
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-                if (responseData.text) {
-                    appConfig.users.refresh = true;
-                    this.props.navigator.pop();
-                } else {
-                    this.setState({
-                        badCredentials: true
-                    });
-                }
-            })
-            .catch((error) => {
-                this.setState({
-                    serverError: true
-                });
-            })
-            .finally(() => {
-                this.setState({
-                    showProgress: false
-                });
-            });
-
     }
 
     goBack() {
@@ -160,7 +88,13 @@ class UserDetails extends Component {
                 Something went wrong.
             </Text>;
         }
-		
+
+        if (this.state.invalidValue) {
+            validCtrl = <Text style={styles.error}>
+                Value required - please provide.
+            </Text>;
+        }
+
         if (this.state.showProgress) {
             loader = <View style={styles.loader}>
                 <ActivityIndicator
@@ -169,12 +103,6 @@ class UserDetails extends Component {
                     animating={true}
                 />
             </View>;
-        }
-		
-        if (this.state.invalidValue) {
-            validCtrl = <Text style={styles.error}>
-                Value required - please provide.
-            </Text>;
         }
 
         return (
@@ -196,22 +124,18 @@ class UserDetails extends Component {
                         <TouchableWithoutFeedback underlayColor='#ddd'>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    {this.state.name}
+                                    New transfer
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
                     <View>
-						<TouchableHighlight
-							onPress={()=> this.deleteItemDialog()}
-							underlayColor='darkblue'
-						>
+                        <TouchableWithoutFeedback underlayColor='#ddd'>
                             <View>
                                 <Text style={styles.textSmall}>
-                                    Delete
                                 </Text>
                             </View>
-                        </TouchableHighlight>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
 
@@ -223,9 +147,9 @@ class UserDetails extends Component {
                                 name: text,
                                 invalidValue: false
                             })}
-                            style={styles.formInputBold}
+                            style={styles.formInput}
                             value={this.state.name}
-                            placeholder='Login'>
+                            placeholder='email'>
                         </TextInput>
 
                         <TextInput
@@ -236,9 +160,9 @@ class UserDetails extends Component {
                             })}
                             style={styles.formInput}
                             value={this.state.pass}
-                            placeholder='Password'>
+                            placeholder='amount'>
                         </TextInput>
-
+{/*
                         <TextInput
                             underlineColorAndroid='rgba(0,0,0,0)'
                             multiline={true}
@@ -249,20 +173,20 @@ class UserDetails extends Component {
                             style={styles.formInputArea}
                             value={this.state.description}
                             placeholder='Description'>
-                        </TextInput>
+                        </TextInput>*/}
 
                         {validCtrl}
 
                         <TouchableHighlight
-                            onPress={() => this.updateItem()}
+                            onPress={() => this.addItem()}
                             style={styles.button}>
                             <Text style={styles.buttonText}>
-                                Submit
+                                Sent
                             </Text>
                         </TouchableHighlight>
 
                         {errorCtrl}
-						
+
 						{loader}
 
                         <Text>{this.state.bugANDROID}</Text>
@@ -299,7 +223,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         margin: 10,
         marginTop: 12,
-        marginRight: 20,
+        marginRight: 40,
         fontWeight: 'bold',
         color: 'white'
     },
@@ -309,17 +233,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         paddingBottom: 130,
         backgroundColor: 'white'
-    },
-    formInputBold: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black',
-        fontWeight: 'bold'
     },
     formInput: {
         height: 50,
@@ -367,4 +280,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default UserDetails;
+export default SentTransfer;

@@ -5,8 +5,6 @@ import NavigationExperimental from 'react-native-deprecated-custom-components';
 import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
 import Balance from '../balance/balance';
-import UserDetails from '../balance/userDetails';
-import UserAdd from '../balance/userAdd';
 
 import Customers from '../customers/customers';
 import CustomerDetails from '../customers/customerDetails';
@@ -16,6 +14,7 @@ import InputDetails from '../inputs/transactionDetails';
 
 import Outputs from '../outputs/transactions';
 import OutputDetails from '../outputs/transactionDetails';
+import SentTransfer from '../outputs/sentTransfer';
 
 class AppContainer extends Component {
     constructor(props) {
@@ -51,7 +50,7 @@ class InputsTab extends Component {
         this.routes = [
             {title: 'Transactions', index: 0},
             {title: 'Transaction Details', index: 1},
-            {title: 'Add Transaction', index: 2}
+            {title: 'Sent Transfer', index: 2}
         ];
     }
 
@@ -63,9 +62,7 @@ class InputsTab extends Component {
             case 1:
                 return <InputDetails data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
-            case 2:
-                return <UserAdd data={route.data} routes={this.routes} navigator={navigator}/>;
-                break;
+
         }
     }
 
@@ -101,7 +98,7 @@ class OutputsTab extends Component {
                 return <OutputDetails data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
             case 2:
-                return <UserAdd data={route.data} routes={this.routes} navigator={navigator}/>;
+                return <SentTransfer data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
         }
     }
@@ -174,9 +171,7 @@ class BalanceTab extends Component {
     constructor(props) {
         super(props);
         this.routes = [
-            {title: 'Balance', index: 0},
-            {title: 'Users Details', index: 1},
-            {title: 'Add User', index: 2}
+            {title: 'Balance', index: 0}
         ];
     }
 
@@ -184,12 +179,6 @@ class BalanceTab extends Component {
         switch (route.index) {
             case 0:
                 return <Balance routes={this.routes} navigator={navigator}/>;
-                break;
-            case 1:
-                return <UserDetails data={route.data} routes={this.routes} navigator={navigator}/>;
-                break;
-            case 2:
-                return <UserAdd data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
         }
     }

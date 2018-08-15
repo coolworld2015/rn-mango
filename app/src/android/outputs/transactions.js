@@ -118,7 +118,7 @@ class Transactions extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.from} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {rowData.to} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
                         {/* {rowData.date.split('T')[1].split('.')[0]} */}
                     </Text>
                 </View>
