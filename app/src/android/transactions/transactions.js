@@ -51,7 +51,7 @@ class Transactions extends Component {
             positionY: 0,
 			searchQuery: ''
         });
-        //http://94.130.206.254/api/Customers/transactions-list?access_token=nEOtEyASFEP9hIWGKIrdVwuFS4UYUSIfNR2Pb7KFn1shHlGEqSmhGjiYFFso7eeX
+
         fetch(appConfig.url + 'Customers/transactions-list?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
@@ -61,7 +61,7 @@ class Transactions extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                console.dir(responseData.data)
+
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions),
                     resultsCount: responseData.data.transactions.length,
