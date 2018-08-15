@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 import NavigationExperimental from 'react-native-deprecated-custom-components';
 import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
-import Users from '../users/users';
-import UserDetails from '../users/userDetails';
-import UserAdd from '../users/userAdd';
+import Balance from '../balance/balance';
+import UserDetails from '../balance/userDetails';
+import UserAdd from '../balance/userAdd';
 
 import Customers from '../customers/customers';
 import CustomerDetails from '../customers/customerDetails';
@@ -35,7 +35,7 @@ class AppContainer extends Component {
  					underlineStyle={{backgroundColor: 'darkblue'}}
 					backgroundColor='white'/>}
             >
-                <UsersTab tabLabel="Balance"/>
+                <BalanceTab tabLabel="Balance"/>
                 <InputsTab tabLabel="Incoming"/>
                 <OutputsTab tabLabel="Send"/>
                 <CustomersTab tabLabel="Customers"/>
@@ -170,11 +170,11 @@ class CustomersTab extends Component {
     }
 }
 
-class UsersTab extends Component {
+class BalanceTab extends Component {
     constructor(props) {
         super(props);
         this.routes = [
-            {title: 'Users', index: 0},
+            {title: 'Balance', index: 0},
             {title: 'Users Details', index: 1},
             {title: 'Add User', index: 2}
         ];
@@ -183,7 +183,7 @@ class UsersTab extends Component {
     renderScene(route, navigator) {
         switch (route.index) {
             case 0:
-                return <Users routes={this.routes} navigator={navigator}/>;
+                return <Balance routes={this.routes} navigator={navigator}/>;
                 break;
             case 1:
                 return <UserDetails data={route.data} routes={this.routes} navigator={navigator}/>;
