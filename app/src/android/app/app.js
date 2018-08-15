@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {
-	BackAndroid
+    BackHandler
 } from 'react-native';
 
 console.disableYellowBox = true;
@@ -14,7 +14,7 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-		BackAndroid.addEventListener('hardwareBackPress', () => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
 			if (this.props.navigator) {
 				this.props.navigator.pop();
 			}
@@ -51,12 +51,10 @@ class App extends Component {
     }
 
     onLogin() {
-        console.log('onLogin');
         this.setState({isLoggedIn: true});
     }
 
     onLogOut() {
-        console.log('onLogOut');
         this.setState({isLoggedIn: false});
     }
 }

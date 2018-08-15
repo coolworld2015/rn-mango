@@ -8,14 +8,14 @@ import {
     TouchableHighlight,
     TouchableWithoutFeedback,
     ScrollView,
-    BackAndroid
+    BackHandler
 } from 'react-native';
 
 class CustomerDetails extends Component {
     constructor(props) {
         super(props);
 
-        BackAndroid.addEventListener('hardwareBackPress', () => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
             if (this.props.navigator) {
                 this.props.navigator.pop();
             }

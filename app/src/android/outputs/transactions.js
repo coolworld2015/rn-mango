@@ -61,26 +61,18 @@ class Transactions extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                //console.log(responseData)
                 let data = responseData.data.transactions.reverse();
-                console.log(data)
                 let customer = responseData.data.customer.email;
-                console.log(customer)
-
-                var items = [];
+                let items = [];
 
                 data.forEach((el) =>{
-                    console.log(el)
                     if (el.to.email) {
-
                         if (el.to.email.toLowerCase() !== customer) {
                             items.push(el)
                         }
                     }
                 });
 
-                //items = [].concat(data);
-                console.log('xxxx ' + items)
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(items),
                     resultsCount: items.length,
@@ -99,17 +91,6 @@ class Transactions extends Component {
                     showProgress: false
                 });
             });
-    }
-
-    sort(a, b) {
-        let nameA = a.date.toLowerCase(), nameB = b.date.toLowerCase();
-        if (nameA < nameB) {
-            return -1
-        }
-        if (nameA > nameB) {
-            return 1
-        }
-        return 0;
     }
 
     showDetails(rowData) {

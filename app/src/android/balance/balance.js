@@ -105,19 +105,6 @@ class Balance extends Component {
         return 0;
     }
 
-    showDetails(rowData) {
-        this.props.navigator.push({
-            index: 1,
-            data: rowData
-        });
-    }
-
-    addItem() {
-        this.props.navigator.push({
-            index: 2
-        });
-    }
-
     renderRow(rowData) {
         return (
             <TouchableHighlight

@@ -10,14 +10,14 @@ import {
     ScrollView,
     ActivityIndicator,
     TextInput,
-    BackAndroid
+    BackHandler
 } from 'react-native';
 
 class SentTransfer extends Component {
     constructor(props) {
         super(props);
 
-        BackAndroid.addEventListener('hardwareBackPress', () => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
             if (this.props.navigator) {
                 this.props.navigator.pop();
             }
@@ -168,18 +168,6 @@ class SentTransfer extends Component {
                             value={this.state.pass}
                             placeholder='amount'>
                         </TextInput>
-{/*
-                        <TextInput
-                            underlineColorAndroid='rgba(0,0,0,0)'
-                            multiline={true}
-                            onChangeText={(text) => this.setState({
-                                description: text,
-                                invalidValue: false
-                            })}
-                            style={styles.formInputArea}
-                            value={this.state.description}
-                            placeholder='Description'>
-                        </TextInput>*/}
 
                         {validCtrl}
 

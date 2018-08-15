@@ -170,10 +170,6 @@ class Login extends Component {
             </ScrollView>
         )
     }
-
-    onLoginPressed() {
-        this.props.onLogin();
-    }
 }
 
 const styles = StyleSheet.create({
