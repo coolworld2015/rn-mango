@@ -63,10 +63,10 @@ class Transactions extends Component {
             .then((responseData) => {
 
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions),
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions.reverse()),
                     resultsCount: responseData.data.transactions.length,
-                    responseData: responseData.data.transactions,
-                    filteredItems: responseData.data.transactions,
+                    responseData: responseData.data.transactions.reverse(),
+                    filteredItems: responseData.data.transactions.reverse(),
 					refreshing: false
                 });
             })
@@ -114,7 +114,8 @@ class Transactions extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.from} - {rowData.date} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {rowData.from} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {/* {rowData.date.split('T')[1].split('.')[0]} */}
                     </Text>
                 </View>
             </TouchableHighlight>
