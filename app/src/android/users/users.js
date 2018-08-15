@@ -75,9 +75,9 @@ class Users extends Component {
             .then((response) => response.json())
             .then((responseData) => {
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData),
+                    dataSource: this.state.dataSource.cloneWithRows([].concat(responseData)),
                     resultsCount: 1,
-                    responseData: responseData,
+                    responseData: [].concat(responseData),
                     filteredItems: [].concat(responseData),
 					refreshing: false
                 });
@@ -126,7 +126,7 @@ class Users extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {((+rowData.balance).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {((+rowData.data.balance).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
                     </Text>
                 </View>
             </TouchableHighlight>

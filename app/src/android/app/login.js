@@ -184,8 +184,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logo: {
-        width: 330,
-        height: 10,
+        width: 150,
+        height: 150,
         paddingTop: 140,
         borderRadius: 20,
 		marginBottom: 10

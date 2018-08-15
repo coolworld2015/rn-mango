@@ -11,7 +11,7 @@ import {
     BackAndroid
 } from 'react-native';
 
-class PhoneDetails extends Component {
+class CustomerDetails extends Component {
     constructor(props) {
         super(props);
 
@@ -260,4 +260,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PhoneDetails;
+export default CustomerDetails;

@@ -16,7 +16,7 @@ import {
 	RefreshControl
 } from 'react-native';
 
-class Phones extends Component {
+class Customers extends Component {
     constructor(props) {
         super(props);
 
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        marginLeft: -20,
+        marginLeft: -10,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',
@@ -394,4 +394,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Phones;
+export default Customers;

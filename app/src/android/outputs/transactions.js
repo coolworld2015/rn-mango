@@ -61,12 +61,17 @@ class Transactions extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
+                let data = responseData.data.transactions.reverse();
+                let customer = responseData.data.customer.email;
+
+                let items = data.filter((el) => el.from.toLowerCase() === customer);
+
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions.reverse()),
-                    resultsCount: responseData.data.transactions.length,
-                    responseData: responseData.data.transactions.reverse(),
-                    filteredItems: responseData.data.transactions.reverse(),
-					refreshing: false
+                    dataSource: this.state.dataSource.cloneWithRows(items),
+                    resultsCount: items.length,
+                    responseData: items,
+                    filteredItems: items,
+                    refreshing: false
                 });
             })
             .catch(() => {
@@ -344,7 +349,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        marginLeft: -20,
+        marginLeft: -10,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',
