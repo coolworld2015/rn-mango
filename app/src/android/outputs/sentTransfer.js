@@ -32,8 +32,7 @@ class SentTransfer extends Component {
 
     addItem() {
         if (this.state.name === undefined || this.state.name === '' ||
-            this.state.pass === undefined || this.state.pass === '' ||
-            this.state.description === undefined || this.state.description === '') {
+            this.state.pass === undefined || this.state.pass === '') {
             this.setState({
                 invalidValue: true
             });
@@ -41,18 +40,16 @@ class SentTransfer extends Component {
         }
 
         this.setState({
+            serverError: false,
             showProgress: true,
             bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/users/add', {
+        fetch(appConfig.url + 'Customers/transfer?access_token='  + appConfig.access_token, {
             method: 'post',
             body: JSON.stringify({
-                id: +new Date,
-                name: this.state.name,
-                pass: this.state.pass,
-                description: this.state.description,
-                authorization: appConfig.access_token
+                recipient: this.state.name,
+                value: this.state.pass
             }),
             headers: {
                 'Accept': 'application/json',
@@ -61,8 +58,15 @@ class SentTransfer extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-                appConfig.users.refresh = true;
-                this.props.navigator.pop();
+                if (responseData.error) {
+                    this.setState({
+                        serverError: true
+                    });
+                } else
+                {
+                    appConfig.users.refresh = true;
+                    this.props.navigator.pop();
+                }
             })
             .catch((error) => {
                 this.setState({
