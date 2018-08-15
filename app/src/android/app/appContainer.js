@@ -11,6 +11,9 @@ import UserAdd from '../users/userAdd';
 import Phones from '../phones/phones';
 import PhoneDetails from '../phones/phoneDetails';
 
+import Transactions from '../transactions/transactions';
+import TransactionDetails from '../transactions/transactionDetails';
+
 class AppContainer extends Component {
     constructor(props) {
         super(props);
@@ -30,6 +33,7 @@ class AppContainer extends Component {
 					backgroundColor='white'/>}
             >
                 <UsersTab tabLabel="Balance"/>
+                <TransactionsTab tabLabel="Transactions"/>
                 <PhonesTab tabLabel="Customers"/>
                 <Logout tabLabel="Logout"/>
             </ScrollableTabView>
@@ -105,6 +109,43 @@ class UsersTab extends Component {
                 break;
             case 1:
                 return <UserDetails data={route.data} routes={this.routes} navigator={navigator}/>;
+                break;
+            case 2:
+                return <UserAdd data={route.data} routes={this.routes} navigator={navigator}/>;
+                break;
+        }
+    }
+
+    render() {
+        return (
+            <NavigationExperimental.Navigator
+                initialRoute={this.routes[0]}
+                initialRouteStack={this.routes}
+                renderScene={this.renderScene.bind(this)}
+                configureScene={(route, routeStack) =>
+                    NavigationExperimental.Navigator.SceneConfigs.PushFromRight}
+            />
+        )
+    }
+}
+
+class TransactionsTab extends Component {
+    constructor(props) {
+        super(props);
+        this.routes = [
+            {title: 'Transactions', index: 0},
+            {title: 'Transaction Details', index: 1},
+            {title: 'Add Transaction', index: 2}
+        ];
+    }
+
+    renderScene(route, navigator) {
+        switch (route.index) {
+            case 0:
+                return <Transactions routes={this.routes} navigator={navigator}/>;
+                break;
+            case 1:
+                return <TransactionDetails data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
             case 2:
                 return <UserAdd data={route.data} routes={this.routes} navigator={navigator}/>;
