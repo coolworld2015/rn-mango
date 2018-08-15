@@ -58,6 +58,7 @@ class SentTransfer extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
+                console.log(responseData)
                 if (responseData.error) {
                     this.setState({
                         serverError: true
@@ -69,6 +70,7 @@ class SentTransfer extends Component {
                 }
             })
             .catch((error) => {
+                console.log(error)
                 this.setState({
                     serverError: true
                 });
@@ -153,7 +155,7 @@ class SentTransfer extends Component {
                             })}
                             style={styles.formInput}
                             value={this.state.name}
-                            placeholder='email'>
+                            placeholder='e-mail'>
                         </TextInput>
 
                         <TextInput

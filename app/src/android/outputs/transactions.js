@@ -61,11 +61,26 @@ class Transactions extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
+                //console.log(responseData)
                 let data = responseData.data.transactions.reverse();
+                console.log(data)
                 let customer = responseData.data.customer.email;
+                console.log(customer)
 
-                let items = data.filter((el) => el.from.toLowerCase() === customer);
+                var items = [];
 
+                data.forEach((el) =>{
+                    console.log(el)
+                    if (el.to.email) {
+
+                        if (el.to.email.toLowerCase() !== customer) {
+                            items.push(el)
+                        }
+                    }
+                });
+
+                //items = [].concat(data);
+                console.log('xxxx ' + items)
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(items),
                     resultsCount: items.length,
@@ -118,7 +133,7 @@ class Transactions extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.to} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {rowData.to.email} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
                         {/* {rowData.date.split('T')[1].split('.')[0]} */}
                     </Text>
                 </View>
