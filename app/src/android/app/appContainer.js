@@ -8,8 +8,8 @@ import Users from '../users/users';
 import UserDetails from '../users/userDetails';
 import UserAdd from '../users/userAdd';
 
-import Phones from '../phones/phones';
-import PhoneDetails from '../phones/phoneDetails';
+import Customers from '../customers/customers';
+import CustomerDetails from '../customers/customerDetails';
 
 import Inputs from '../inputs/transactions';
 import InputDetails from '../inputs/transactionDetails';
@@ -38,7 +38,7 @@ class AppContainer extends Component {
                 <UsersTab tabLabel="Balance"/>
                 <InputsTab tabLabel="Incoming"/>
                 <OutputsTab tabLabel="Send"/>
-                <PhonesTab tabLabel="Customers"/>
+                <CustomersTab tabLabel="Customers"/>
                 <Logout tabLabel="Logout"/>
             </ScrollableTabView>
         );
@@ -131,22 +131,22 @@ class Logout extends Component {
     }
 }
 
-class PhonesTab extends Component {
+class CustomersTab extends Component {
     constructor(props) {
         super(props);
         this.routes = [
             {title: 'Customers', index: 0},
-            {title: 'Phones Details', index: 1}
+            {title: 'Customer Details', index: 1}
         ];
     }
 
     renderScene(route, navigator) {
         switch (route.index) {
             case 0:
-                return <Phones routes={this.routes} navigator={navigator}/>;
+                return <Customers routes={this.routes} navigator={navigator}/>;
                 break;
             case 1:
-                return <PhoneDetails data={route.data} routes={this.routes} navigator={navigator}/>;
+                return <CustomerDetails data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
             case 2:
                 return <Search data={route.data} routes={this.routes} navigator={navigator}/>;
