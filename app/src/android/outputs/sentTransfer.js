@@ -65,7 +65,8 @@ class SentTransfer extends Component {
                     });
                 } else
                 {
-                    appConfig.users.refresh = true;
+                    appConfig.balance.refresh = true;
+                    appConfig.outputs.refresh = true;
                     this.props.navigator.pop();
                 }
             })

@@ -231,12 +231,12 @@ class Customers extends Component {
                     </View>
                     <View>
 						<TouchableHighlight
-							onPress={()=> this.goSearch()}
+							//onPress={()=> this.goSearch()}
 							underlayColor='darkblue'
 						>
                             <View>
                                 <Text style={styles.textSmall}>
-                                    New
+
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        marginLeft: -10,
+        marginLeft: -40,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',

@@ -29,10 +29,10 @@ class App extends Component {
             access_token: '',
             url: 'http://94.130.206.254/api/',
 			onLogOut: this.onLogOut.bind(this),
-			users: {
+			balance: {
                 refresh: false
             },
-			phones: {
+            outputs: {
                 refresh: false
             }
         };

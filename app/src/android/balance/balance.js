@@ -36,16 +36,10 @@ class Balance extends Component {
         };
     }
 
-    componentDidMount() {
-		this.setState({
-            width: Dimensions.get('window').width
-        });
-        this.getItems();
-    }
-
     componentWillUpdate() {
-        if (appConfig.users.refresh) {
-            appConfig.users.refresh = false;
+        console.log('balance')
+        if (appConfig.balance.refresh) {
+            appConfig.balance.refresh = false;
 
             this.setState({
                 showProgress: true,
@@ -55,6 +49,14 @@ class Balance extends Component {
             this.getItems();
         }
     }
+
+    componentDidMount() {
+		this.setState({
+            width: Dimensions.get('window').width
+        });
+        this.getItems();
+    }
+
 
     getItems() {
 		this.setState({
