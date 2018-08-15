@@ -61,12 +61,16 @@ class Transactions extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
+                let data = responseData.data.transactions.reverse();
+                let customer = responseData.data.customer.email;
+
+                let items = data.filter((el) => el.from.toLowerCase() !== customer);
 
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions.reverse()),
-                    resultsCount: responseData.data.transactions.length,
-                    responseData: responseData.data.transactions.reverse(),
-                    filteredItems: responseData.data.transactions.reverse(),
+                    dataSource: this.state.dataSource.cloneWithRows(items),
+                    resultsCount: items.length,
+                    responseData: items,
+                    filteredItems: items,
 					refreshing: false
                 });
             })
@@ -229,7 +233,7 @@ class Transactions extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Transactions
+                                    Incoming
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -241,7 +245,7 @@ class Transactions extends Component {
 						>
                             <View>
                                 <Text style={styles.textSmall}>
-                                    New
+
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -345,6 +349,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
+        marginLeft: -30,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',

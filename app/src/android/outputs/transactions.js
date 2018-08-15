@@ -16,7 +16,7 @@ import {
 	RefreshControl
 } from 'react-native';
 
-class Phones extends Component {
+class Transactions extends Component {
     constructor(props) {
         super(props);
 
@@ -52,7 +52,7 @@ class Phones extends Component {
 			searchQuery: ''
         });
 
-        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
+        fetch(appConfig.url + 'Customers/transactions-list?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -61,12 +61,11 @@ class Phones extends Component {
         })
             .then((response) => response.json())
             .then((responseData) => {
-
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 15)),
-                    resultsCount: responseData.length,
-                    responseData: responseData,
-                    filteredItems: responseData,
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.data.transactions.reverse()),
+                    resultsCount: responseData.data.transactions.length,
+                    responseData: responseData.data.transactions.reverse(),
+                    filteredItems: responseData.data.transactions.reverse(),
 					refreshing: false
                 });
             })
@@ -83,7 +82,7 @@ class Phones extends Component {
     }
 
     sort(a, b) {
-        let nameA = a.first_name.toLowerCase(), nameB = b.first_name.toLowerCase();
+        let nameA = a.date.toLowerCase(), nameB = b.date.toLowerCase();
         if (nameA < nameB) {
             return -1
         }
@@ -114,7 +113,8 @@ class Phones extends Component {
             >
                 <View style={styles.row}>
                     <Text style={styles.rowText}>
-                        {rowData.first_name} - {rowData.email}
+                        {rowData.from} - {rowData.date.split('T')[0]} - {((+rowData.value).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+                        {/* {rowData.date.split('T')[1].split('.')[0]} */}
                     </Text>
                 </View>
             </TouchableHighlight>
@@ -150,7 +150,7 @@ class Phones extends Component {
         }
 
         let arr = [].concat(this.state.responseData);
-        let items = arr.filter((el) => el.first_name.toLowerCase().indexOf(text.toLowerCase()) !== -1);
+        let items = arr.filter((el) => el.from.toLowerCase().indexOf(text.toLowerCase()) !== -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -228,7 +228,7 @@ class Phones extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Customers
+                                    Send
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -394,4 +394,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Phones;
+export default Transactions;
