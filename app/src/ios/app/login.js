@@ -37,7 +37,7 @@ class Login extends Component {
             showProgress: true
         });
 
-        fetch(window.appConfig.url + 'Contacts/login', {
+        fetch(window.appConfig.url + 'Customers/login', {
             method: 'post',
             body: JSON.stringify({
                 username: this.state.username,
