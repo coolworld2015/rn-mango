@@ -6,8 +6,8 @@ import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view
 
 import Balance from '../balance/balance';
 
-import Customers from '../customers/customers';
-import CustomerDetails from '../customers/customerDetails';
+import Contacts from '../contacts/contacts';
+import ContactDetails from '../contacts/contactDetails';
 
 import Inputs from '../inputs/transactions';
 import InputDetails from '../inputs/transactionDetails';
@@ -35,10 +35,10 @@ class AppContainer extends Component {
 					backgroundColor='white'/>}
             >
                 <BalanceTab tabLabel="Balance"/>
-                <InputsTab tabLabel="Incoming"/>
+                <InputsTab tabLabel="Received"/>
                 <OutputsTab tabLabel="Send"/>
-                <CustomersTab tabLabel="Customers"/>
-                <Logout tabLabel="Logout"/>
+                <ContactsTab tabLabel="Contacts"/>
+                <Logout tabLabel="Quit"/>
             </ScrollableTabView>
         );
     }
@@ -128,28 +128,22 @@ class Logout extends Component {
     }
 }
 
-class CustomersTab extends Component {
+class ContactsTab extends Component {
     constructor(props) {
         super(props);
         this.routes = [
-            {title: 'Customers', index: 0},
-            {title: 'Customer Details', index: 1}
+            {title: 'Contacts', index: 0},
+            {title: 'Contact Details', index: 1}
         ];
     }
 
     renderScene(route, navigator) {
         switch (route.index) {
             case 0:
-                return <Customers routes={this.routes} navigator={navigator}/>;
+                return <Contacts routes={this.routes} navigator={navigator}/>;
                 break;
             case 1:
-                return <CustomerDetails data={route.data} routes={this.routes} navigator={navigator}/>;
-                break;
-            case 2:
-                return <Search data={route.data} routes={this.routes} navigator={navigator}/>;
-                break;
-            case 3:
-                return <SearchResults data={route.data} routes={this.routes} navigator={navigator}/>;
+                return <ContactDetails data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
         }
     }

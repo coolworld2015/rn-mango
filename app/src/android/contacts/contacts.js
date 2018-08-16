@@ -16,7 +16,7 @@ import {
 	RefreshControl
 } from 'react-native';
 
-class Customers extends Component {
+class Contacts extends Component {
     constructor(props) {
         super(props);
 
@@ -218,7 +218,7 @@ class Customers extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Customers
+                                    Contacts
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -384,4 +384,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Customers;
+export default Contacts;

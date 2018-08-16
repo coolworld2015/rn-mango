@@ -59,7 +59,7 @@ class AppContainer extends Component {
                         ref="customers"
                         initialRoute={{
                             component: Phones,
-                            title: 'Customers',
+                            title: 'Contacts',
                             rightButtonTitle: 'New',
                             onRightButtonPress: () => {
                                 this.refs.customers.navigator.push({

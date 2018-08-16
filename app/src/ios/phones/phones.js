@@ -51,7 +51,7 @@ class Phones extends Component {
             searchQuery: ''
         });
 
-        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
+        fetch(appConfig.url + 'Contacts?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',

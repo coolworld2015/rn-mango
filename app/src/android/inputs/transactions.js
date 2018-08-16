@@ -229,7 +229,7 @@ class Transactions extends Component {
                         <TouchableWithoutFeedback>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    Incoming
+                                    Received
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>

@@ -53,7 +53,7 @@ class Users extends Component {
     }
 
     getItems() {
-        fetch(appConfig.url + 'Customers/getbalance?access_token=' + appConfig.access_token, {
+        fetch(appConfig.url + 'Contacts/getbalance?access_token=' + appConfig.access_token, {
             method: 'get',
             headers: {
                 'Accept': 'application/json',
