@@ -50,7 +50,7 @@ class AppContainer extends Component {
 
                 <TabBarIOS.Item
                     title="Received"
-                    icon={require('../../../img/users.png')}
+                    icon={require('../../../img/transfer.png')}
                     selected={this.state.selectedTab === 'Received'}
                     onPress={() => this.setState({selectedTab: 'Received'})}>
 
@@ -58,13 +58,38 @@ class AppContainer extends Component {
                         style={{
                             flex: 1
                         }}
-                        ref="contacts"
+                        ref="inputs"
                         initialRoute={{
                             component: Inputs,
                             title: 'Received',
                             //rightButtonTitle: 'New',
                             onRightButtonPress: () => {
-                                this.refs.customers.navigator.push({
+                                this.refs.inputs.navigator.push({
+                                    title: "New record",
+                                    //component: UserAdd
+                                });
+                            }
+                        }}
+                    />
+                </TabBarIOS.Item>
+
+                <TabBarIOS.Item
+                    title="Send"
+                    icon={require('../../../img/phones.png')}
+                    selected={this.state.selectedTab === 'Send'}
+                    onPress={() => this.setState({selectedTab: 'Send'})}>
+
+                    <NavigatorIOS
+                        style={{
+                            flex: 1
+                        }}
+                        ref="outputs"
+                        initialRoute={{
+                            component: Inputs,
+                            title: 'Send',
+                            //rightButtonTitle: 'New',
+                            onRightButtonPress: () => {
+                                this.refs.outputs.navigator.push({
                                     title: "New record",
                                     //component: UserAdd
                                 });
