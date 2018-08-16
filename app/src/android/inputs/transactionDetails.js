@@ -27,7 +27,6 @@ class TransactionDetails extends Component {
         };
 
         if (props.data) {
-
             this.state = {
                 id: props.data.id,
                 first_name: props.data.to.first_name,

@@ -9,16 +9,18 @@ import {
     ScrollView
 } from 'react-native';
 
-class ContactDetails extends Component {
+class InputDetails extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             id: props.data.id,
-            first_name: props.data.first_name,
-            last_name: props.data.last_name,
-            username: props.data.username,
-            email: props.data.email
+            first_name: props.data.to.first_name,
+            last_name: props.data.to.last_name,
+            username: props.data.to.username,
+            email: props.data.to.email,
+            amount: (+props.data.value).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+            date: props.data.date.split('T')[0] + ' ' + props.data.date.split('T')[1].split('.')[0]
         };
     }
 
@@ -31,6 +33,28 @@ class ContactDetails extends Component {
             <View style={styles.container}>
                 <ScrollView>
                     <View style={styles.form}>
+                        <View style={styles.itemBlock}>
+                            <Text style={styles.itemTextBold}>
+                                Amount:
+                            </Text>
+                            <View style={styles.itemWrap}>
+                                <Text style={styles.itemText}>
+                                    {this.state.amount}
+                                </Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.itemBlock}>
+                            <Text style={styles.itemTextBold}>
+                                Date:
+                            </Text>
+                            <View style={styles.itemWrap}>
+                                <Text style={styles.itemText}>
+                                    {this.state.date}
+                                </Text>
+                            </View>
+                        </View>
+
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
                                 First name:
@@ -155,4 +179,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ContactDetails;
+export default InputDetails;

@@ -15,7 +15,7 @@ import {
     Dimensions
 } from 'react-native';
 
-import ContactDetails from './contactDetails';
+import InputDetails from './inputDetails';
 
 class Inputs extends Component {
     constructor(props) {
@@ -105,8 +105,8 @@ class Inputs extends Component {
 
     showDetails(rowData) {
         this.props.navigator.push({
-            title: rowData.first_name,
-            component: ContactDetails,
+            title: rowData.from.first_name,
+            component: InputDetails,
             passProps: {
                 data: rowData
             }

@@ -11,6 +11,7 @@ import {
     ScrollView,
     ActivityIndicator,
     TextInput,
+    Image,
     Alert
 } from 'react-native';
 
@@ -28,7 +29,8 @@ class Balance extends Component {
             serverError: false,
             resultsCount: 0,
             recordsCount: 25,
-            positionY: 0
+            positionY: 0,
+            searchQuery: ''
         };
 
     }
@@ -234,7 +236,7 @@ class Balance extends Component {
     }
 
     render() {
-        let errorCtrl, loader;
+        let errorCtrl, loader, image;
 
         if (this.state.serverError) {
             errorCtrl = <Text style={styles.error}>
@@ -253,16 +255,53 @@ class Balance extends Component {
             </View>;
         }
 
+        if (this.state.searchQuery.length > 0) {
+            image = <Image
+                source={require('../../../img/cancel.png')}
+                style={{
+                    height: 20,
+                    width: 20,
+                    marginTop: 10
+                }}
+            />;
+        }
+
         return (
             <View style={styles.container}>
-                <View style={styles.search}>
-                    <TextInput
-                        editable={false}
-                        style={styles.textInput}
-                        //onChangeText={this.onChangeText.bind(this)}
-                        value={this.state.searchQuery}
-                        placeholder="Search here">
-                    </TextInput>
+                <View style={styles.iconForm}>
+                    <View>
+                        <TextInput
+                            onChangeText={this.onChangeText.bind(this)}
+                            style={{
+                                height: 45,
+                                padding: 5,
+                                backgroundColor: 'white',
+                                borderWidth: 3,
+                                borderColor: 'white',
+                                borderRadius: 0,
+                                width: this.state.width * .90,
+                            }}
+                            value={this.state.searchQuery}
+                            placeholder="Search here">
+                        </TextInput>
+                    </View>
+                    <View style={{
+                        height: 45,
+                        backgroundColor: 'white',
+                        borderWidth: 3,
+                        borderColor: 'white',
+                        marginLeft: -5,
+                        paddingLeft: 5,
+                        width: this.state.width * .10,
+                    }}>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.clearSearchQuery()}
+                        >
+                            <View>
+                                {image}
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </View>
                 </View>
 
                 {errorCtrl}
@@ -298,7 +337,13 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        marginTop: 64
+    },
+    iconForm: {
+        flexDirection: 'row',
+        borderColor: 'lightgray',
+        borderWidth: 3
     },
     header: {
         flexDirection: 'row',
