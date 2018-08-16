@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 
 import Balance from '../balance/balance';
+
+import Inputs from '../inputs/inputs';
+
 import Contacts from '../contacts/contacts';
 
 class AppContainer extends Component {
@@ -41,6 +44,31 @@ class AppContainer extends Component {
                             component: Balance,
                             title: 'Balance',
                             //rightButtonTitle: 'New'
+                        }}
+                    />
+                </TabBarIOS.Item>
+
+                <TabBarIOS.Item
+                    title="Received"
+                    icon={require('../../../img/users.png')}
+                    selected={this.state.selectedTab === 'Received'}
+                    onPress={() => this.setState({selectedTab: 'Received'})}>
+
+                    <NavigatorIOS
+                        style={{
+                            flex: 1
+                        }}
+                        ref="contacts"
+                        initialRoute={{
+                            component: Inputs,
+                            title: 'Received',
+                            //rightButtonTitle: 'New',
+                            onRightButtonPress: () => {
+                                this.refs.customers.navigator.push({
+                                    title: "New record",
+                                    //component: UserAdd
+                                });
+                            }
                         }}
                     />
                 </TabBarIOS.Item>
