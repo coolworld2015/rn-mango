@@ -10,6 +10,8 @@ import {
 import Balance from '../balance/balance';
 
 import Inputs from '../inputs/inputs';
+import Outputs from '../outputs/outputs';
+import SentTransfer from '../outputs/sentTransfer';
 
 import Contacts from '../contacts/contacts';
 
@@ -42,8 +44,7 @@ class AppContainer extends Component {
                         }}
                         initialRoute={{
                             component: Balance,
-                            title: 'Balance',
-                            //rightButtonTitle: 'New'
+                            title: 'Balance'
                         }}
                     />
                 </TabBarIOS.Item>
@@ -61,14 +62,7 @@ class AppContainer extends Component {
                         ref="inputs"
                         initialRoute={{
                             component: Inputs,
-                            title: 'Received',
-                            //rightButtonTitle: 'New',
-                            onRightButtonPress: () => {
-                                this.refs.inputs.navigator.push({
-                                    title: "New record",
-                                    //component: UserAdd
-                                });
-                            }
+                            title: 'Received'
                         }}
                     />
                 </TabBarIOS.Item>
@@ -85,13 +79,13 @@ class AppContainer extends Component {
                         }}
                         ref="outputs"
                         initialRoute={{
-                            component: Inputs,
+                            component: Outputs,
                             title: 'Send',
-                            //rightButtonTitle: 'New',
+                            rightButtonTitle: 'New',
                             onRightButtonPress: () => {
                                 this.refs.outputs.navigator.push({
-                                    title: "New record",
-                                    //component: UserAdd
+                                    title: "New transfer",
+                                    component: SentTransfer
                                 });
                             }
                         }}
