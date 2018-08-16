@@ -87,7 +87,7 @@ class Login extends Component {
                 <View style={styles.container}>
                     <View style={styles.headerContainer}>
                         <Text style={styles.heading}>
-                            Mangosoft-Demo
+                            ValueCoin-Demo
                         </Text>
                     </View>
 
@@ -117,6 +117,7 @@ class Login extends Component {
                     </TextInput>
 
                     <TouchableHighlight
+                        //disabled={true}
                         onPress={() => this.onLogin()}
                         style={styles.button}>
                         <Text style={styles.buttonText}>
@@ -146,8 +147,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     logo: {
-        width: 330,
-        height: 10,
+        width: 150,
+        height: 150,
         paddingTop: 140,
         borderRadius: 20,
         marginBottom: 10

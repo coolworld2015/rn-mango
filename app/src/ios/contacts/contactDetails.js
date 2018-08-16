@@ -9,18 +9,16 @@ import {
     ScrollView
 } from 'react-native';
 
-class PhoneDetails extends Component {
+class ContactDetails extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             id: props.data.id,
-            name: props.data.name,
-            phone: props.data.phone,
-            street: props.data.street,
-            house: props.data.house,
-            apt: props.data.apt,
-            index: props.data.index
+            first_name: props.data.first_name,
+            last_name: props.data.last_name,
+            username: props.data.username,
+            email: props.data.email
         };
     }
 
@@ -35,66 +33,44 @@ class PhoneDetails extends Component {
                     <View style={styles.form}>
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Name:
+                                First name:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.name}
+                                    {this.state.first_name}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Phone:
+                                Last name:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.phone}
+                                    {this.state.last_name}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                Street:
+                                Username:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.street}
+                                    {this.state.username}
                                 </Text>
                             </View>
                         </View>
 
                         <View style={styles.itemBlock}>
                             <Text style={styles.itemTextBold}>
-                                House:
+                                E-mail:
                             </Text>
                             <View style={styles.itemWrap}>
                                 <Text style={styles.itemText}>
-                                    {this.state.house}
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.itemBlock}>
-                            <Text style={styles.itemTextBold}>
-                                Apt:
-                            </Text>
-                            <View style={styles.itemWrap}>
-                                <Text style={styles.itemText}>
-                                    {this.state.apt}
-                                </Text>
-                            </View>
-                        </View>
-
-                        <View style={styles.itemBlock}>
-                            <Text style={styles.itemTextBold}>
-                                Zip:
-                            </Text>
-                            <View style={styles.itemWrap}>
-                                <Text style={styles.itemText}>
-                                    {this.state.index}
+                                    {this.state.email}
                                 </Text>
                             </View>
                         </View>
@@ -163,7 +139,8 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 50,
-        backgroundColor: '#48BBEC',
+        //backgroundColor: '#48BBEC',
+        backgroundColor: 'darkblue',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
         marginTop: 10,
@@ -178,4 +155,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default PhoneDetails;
+export default ContactDetails;

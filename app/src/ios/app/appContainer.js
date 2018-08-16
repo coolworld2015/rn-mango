@@ -7,16 +7,15 @@ import {
     Alert
 } from 'react-native';
 
-import Phones from '../phones/phones';
-import Users from '../users/users';
-import UserAdd from '../users/userAdd';
+import Balance from '../balance/balance';
+import Contacts from '../contacts/contacts';
 
 class AppContainer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            selectedTab: 'Users'
+            selectedTab: 'Balance'
         };
     }
 
@@ -31,40 +30,40 @@ class AppContainer extends Component {
                 <TabBarIOS.Item
                     title="Balance"
                     icon={require('../../../img/campaigns.png')}
-                    selected={this.state.selectedTab === 'Users'}
-                    onPress={() => this.setState({selectedTab: 'Users'})}>
+                    selected={this.state.selectedTab === 'Balance'}
+                    onPress={() => this.setState({selectedTab: 'Balance'})}>
 
                     <NavigatorIOS
                         style={{
                             flex: 1
                         }}
                         initialRoute={{
-                            component: Users,
+                            component: Balance,
                             title: 'Balance',
-                            rightButtonTitle: 'New'
+                            //rightButtonTitle: 'New'
                         }}
                     />
                 </TabBarIOS.Item>
 
                 <TabBarIOS.Item
-                    title="Customers"
+                    title="Contacts"
                     icon={require('../../../img/users.png')}
-                    selected={this.state.selectedTab === 'Phones'}
-                    onPress={() => this.setState({selectedTab: 'Phones'})}>
+                    selected={this.state.selectedTab === 'Contacts'}
+                    onPress={() => this.setState({selectedTab: 'Contacts'})}>
 
                     <NavigatorIOS
                         style={{
                             flex: 1
                         }}
-                        ref="customers"
+                        ref="contacts"
                         initialRoute={{
-                            component: Phones,
+                            component: Contacts,
                             title: 'Contacts',
-                            rightButtonTitle: 'New',
+                            //rightButtonTitle: 'New',
                             onRightButtonPress: () => {
                                 this.refs.customers.navigator.push({
                                     title: "New record",
-                                    component: UserAdd
+                                    //component: UserAdd
                                 });
                             }
                         }}

@@ -15,9 +15,9 @@ import {
     Dimensions
 } from 'react-native';
 
-import PhoneDetails from './phoneDetails';
+import ContactDetails from './contactDetails';
 
-class Phones extends Component {
+class Contacts extends Component {
     constructor(props) {
         super(props);
 
@@ -92,8 +92,8 @@ class Phones extends Component {
 
     showDetails(rowData) {
         this.props.navigator.push({
-            title: rowData.name,
-            component: PhoneDetails,
+            title: rowData.first_name,
+            component: ContactDetails,
             passProps: {
                 data: rowData
             }
@@ -343,4 +343,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Phones;
+export default Contacts;
