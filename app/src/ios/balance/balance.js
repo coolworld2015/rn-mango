@@ -40,8 +40,8 @@ class Balance extends Component {
     }
 
     componentWillUpdate() {
-        if (appConfig.users.refresh) {
-            appConfig.users.refresh = false;
+        if (appConfig.balance.refresh) {
+            appConfig.balance.refresh = false;
 
             this.setState({
                 showProgress: true,

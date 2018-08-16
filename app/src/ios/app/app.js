@@ -19,12 +19,12 @@ class App extends Component {
             access_token: '',
             url: 'http://94.130.206.254/api/',
             onLogOut: this.onLogOut.bind(this),
-            search: {
+            balance: {
                 refresh: true,
                 items: [],
                 item: {}
             },
-            users: {
+            outputs: {
                 refresh: true,
                 items: [],
                 item: {}
