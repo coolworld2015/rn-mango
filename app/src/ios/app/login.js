@@ -101,6 +101,7 @@ class Login extends Component {
                             badCredentials: false
                         })}
                         value={this.state.username}
+                        editable = {!this.state.showProgress}
                         style={styles.loginInput}
                         placeholder="Login">
                     </TextInput>
@@ -111,14 +112,15 @@ class Login extends Component {
                             badCredentials: false
                         })}
                         value={this.state.password}
+                        editable = {!this.state.showProgress}
                         style={styles.loginInput}
                         placeholder="Password"
                         secureTextEntry={true}>
                     </TextInput>
 
                     <TouchableHighlight
-                        //disabled={true}
                         onPress={() => this.onLogin()}
+                        disabled = {this.state.showProgress}
                         style={styles.button}>
                         <Text style={styles.buttonText}>
                             Log in
