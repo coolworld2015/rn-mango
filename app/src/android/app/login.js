@@ -122,6 +122,7 @@ class Login extends Component {
                             backgroundColor: 'white'
                         }}
                         value={this.state.username}
+                        editable = {!this.state.showProgress}
                         placeholder='Login'>
                     </TextInput>
 
@@ -144,12 +145,14 @@ class Login extends Component {
                             backgroundColor: 'white'
                         }}
                         value={this.state.password}
+                        editable = {!this.state.showProgress}
                         placeholder='Password'
                         secureTextEntry={true}>
                     </TextInput>
 
                     <TouchableHighlight
                         onPress={() => this.onLogin()}
+                        disabled = {this.state.showProgress}
                         style={styles.button}>
                         <Text style={styles.buttonText}>
                             Log in
