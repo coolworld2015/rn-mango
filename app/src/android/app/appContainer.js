@@ -92,7 +92,7 @@ class AppContainer extends Component {
                     <InputsTab tabLabel="Received"/>
                     <OutputsTab tabLabel="Send"/>
                     <ContactsTab tabLabel="Contacts"/>
-                    <Logout tabLabel="Quit"/>
+                   {/* <Logout tabLabel="Quit"/>*/}
                 </ScrollableTabView>
             </DrawerLayoutAndroid>
         );
