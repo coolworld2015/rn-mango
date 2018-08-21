@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         height: 150,
         paddingTop: 140,
         borderRadius: 20,
-		marginBottom: 10
+		//marginBottom: 10
     },
     headerContainer: {
         justifyContent: 'center',
