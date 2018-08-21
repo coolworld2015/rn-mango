@@ -44,7 +44,6 @@ class Transactions extends Component {
     }
 
     componentWillUpdate() {
-        console.log('outputs')
         if (appConfig.outputs.refresh) {
             appConfig.outputs.refresh = false;
 

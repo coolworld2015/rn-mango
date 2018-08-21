@@ -37,7 +37,6 @@ class Balance extends Component {
     }
 
     componentWillUpdate() {
-        console.log('balance')
         if (appConfig.balance.refresh) {
             appConfig.balance.refresh = false;
 

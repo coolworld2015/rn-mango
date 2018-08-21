@@ -34,6 +34,9 @@ class App extends Component {
             },
             outputs: {
                 refresh: false
+            },
+            contacts: {
+                refresh: false
             }
         };
     }

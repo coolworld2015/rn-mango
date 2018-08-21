@@ -71,8 +71,7 @@ class AddContact extends Component {
                     });
                 } else
                 {
-                    appConfig.balance.refresh = true;
-                    appConfig.outputs.refresh = true;
+                    appConfig.contacts.refresh = true;
                     this.props.navigator.pop();
                 }
             })
