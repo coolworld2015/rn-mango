@@ -137,7 +137,7 @@ class AddContact extends Component {
                         <TouchableWithoutFeedback underlayColor='#ddd'>
                             <View>
                                 <Text style={styles.textLarge}>
-                                    New transfer
+                                    New contact
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
