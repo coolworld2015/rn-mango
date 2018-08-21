@@ -100,6 +100,12 @@ class Contacts extends Component {
         });
     }
 
+    addContact() {
+        this.props.navigator.push({
+            index: 2
+        });
+    }
+
     renderRow(rowData) {
         return (
             <TouchableHighlight
@@ -225,12 +231,12 @@ class Contacts extends Component {
                     </View>
                     <View>
 						<TouchableHighlight
-							//onPress={()=> this.goSearch()}
+							onPress={()=> this.addContact()}
 							underlayColor='darkblue'
 						>
                             <View>
                                 <Text style={styles.textSmall}>
-
+                                    New
                                 </Text>
                             </View>
                         </TouchableHighlight>
@@ -334,7 +340,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        marginLeft: -40,
+        marginLeft: -10,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',

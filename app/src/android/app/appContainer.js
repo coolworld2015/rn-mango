@@ -24,6 +24,7 @@ import Balance from '../balance/balance';
 
 import Contacts from '../contacts/contacts';
 import ContactDetails from '../contacts/contactDetails';
+import AddContact from '../contacts/addContact';
 
 import Inputs from '../inputs/transactions';
 import InputDetails from '../inputs/transactionDetails';
@@ -188,7 +189,8 @@ class ContactsTab extends Component {
         super(props);
         this.routes = [
             {title: 'Contacts', index: 0},
-            {title: 'Contact Details', index: 1}
+            {title: 'Contact Details', index: 1},
+            {title: 'Add Contact', index: 2}
         ];
     }
 
@@ -199,6 +201,9 @@ class ContactsTab extends Component {
                 break;
             case 1:
                 return <ContactDetails data={route.data} routes={this.routes} navigator={navigator}/>;
+                break;
+            case 2:
+                return <AddContact data={route.data} routes={this.routes} navigator={navigator}/>;
                 break;
         }
     }
