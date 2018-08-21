@@ -188,8 +188,6 @@ class Balance extends Component {
         appConfig.drawer.openDrawer();
     }
 
-
-
     render() {
         let errorCtrl, loader, image;
 
@@ -227,7 +225,7 @@ class Balance extends Component {
                         <TouchableWithoutFeedback onPress={this.onMenu.bind(this)}>
                             <View>
                                 <Image style={styles.menu}
-                                       source={require('../../../img/menu.png')}
+                                   source={require('../../../img/menu.png')}
                                 />
                             </View>
                         </TouchableWithoutFeedback>
@@ -405,7 +403,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 14,
         marginTop: 16
-    },
+    }
 });
 
 export default Balance;

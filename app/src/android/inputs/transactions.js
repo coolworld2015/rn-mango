@@ -184,6 +184,10 @@ class Transactions extends Component {
         });
     }
 
+    onMenu() {
+        appConfig.drawer.openDrawer();
+    }
+
     render() {
         let errorCtrl, loader, image;
 
@@ -218,10 +222,11 @@ class Transactions extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <View>
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={this.onMenu.bind(this)}>
                             <View>
-                                <Text style={styles.textSmall}>
-                                </Text>
+                                <Image style={styles.menu}
+                                   source={require('../../../img/menu.png')}
+                                />
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
@@ -345,7 +350,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10,
-        marginLeft: -30,
+        marginLeft: -40,
         marginTop: 12,
         paddingLeft: 40,
         fontWeight: 'bold',
@@ -392,6 +397,11 @@ const styles = StyleSheet.create({
         color: 'red',
         paddingTop: 10,
         textAlign: 'center'
+    },
+    menu: {
+        alignItems: 'center',
+        margin: 14,
+        marginTop: 16
     }
 });
 
