@@ -28,6 +28,7 @@ class SentTransfer extends Component {
         this.state = {
             contacts: [{email: 'Select e-mail'}],
             showProgress: false,
+            showProgressContacts: false,
             bugANDROID: ''
         }
     }
@@ -37,6 +38,12 @@ class SentTransfer extends Component {
     }
 
     getContacts() {
+        this.setState({
+            serverError: false,
+            showProgressContacts: true,
+            bugANDROID: ' '
+        });
+
         fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
             method: 'get',
             headers: {
@@ -63,8 +70,7 @@ class SentTransfer extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false,
-                    showProgressAdd: false
+                    showProgressContacts: false
                 });
             });
     }
@@ -138,7 +144,7 @@ class SentTransfer extends Component {
     }
 
     render() {
-        let errorCtrl, validCtrl, loader;
+        let errorCtrl, validCtrl, loader, loaderContacts;
 
         if (this.state.serverError) {
             errorCtrl = <Text style={styles.error}>
@@ -154,6 +160,16 @@ class SentTransfer extends Component {
 
         if (this.state.showProgress) {
             loader = <View style={styles.loader}>
+                <ActivityIndicator
+                    size="large"
+					color="darkblue"
+                    animating={true}
+                />
+            </View>;
+        }
+
+        if (this.state.showProgressContacts) {
+            loaderContacts = <View style={styles.loader}>
                 <ActivityIndicator
                     size="large"
 					color="darkblue"
@@ -195,6 +211,8 @@ class SentTransfer extends Component {
                         </TouchableWithoutFeedback>
                     </View>
                 </View>
+
+                {loaderContacts}
 
                 <ScrollView keyboardShouldPersistTaps='always'>
                     <View style={styles.form}>
