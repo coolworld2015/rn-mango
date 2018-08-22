@@ -10,6 +10,7 @@ import {
     ScrollView,
     ActivityIndicator,
     TextInput,
+    Picker,
     BackHandler
 } from 'react-native';
 
@@ -25,14 +26,52 @@ class SentTransfer extends Component {
         });
 
         this.state = {
+            contacts: [{email: 'Select e-mail'}],
             showProgress: false,
             bugANDROID: ''
         }
     }
 
+    componentDidMount() {
+        this.getContacts();
+    }
+
+    getContacts() {
+        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+                let items = responseData.sort(this.sort);
+                items.unshift({email: 'Select e-mail'});
+                this.setState({
+                    contacts: items,
+                    serverError: false
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+                setTimeout(() => {
+                    appConfig.onLogOut();
+                }, 1000);
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false,
+                    showProgressAdd: false
+                });
+            });
+    }
+
     addItem() {
-        if (this.state.name === undefined || this.state.name === '' ||
-            this.state.pass === undefined || this.state.pass === '') {
+        if (this.state.contact === undefined || this.state.contact === '' ||
+            this.state.amount === undefined || this.state.amount === '') {
             this.setState({
                 invalidValue: true
             });
@@ -48,8 +87,8 @@ class SentTransfer extends Component {
         fetch(appConfig.url + 'Customers/transfer?access_token='  + appConfig.access_token, {
             method: 'post',
             body: JSON.stringify({
-                recipient: this.state.name,
-                value: this.state.pass
+                recipient: this.state.contactEmail,
+                value: this.state.amount
             }),
             headers: {
                 'Accept': 'application/json',
@@ -81,6 +120,17 @@ class SentTransfer extends Component {
                     showProgress: false
                 });
             });
+    }
+
+    sort(a, b) {
+        var nameA = a.email.toLowerCase(), nameB = b.email.toLowerCase();
+        if (nameA < nameB) {
+            return -1
+        }
+        if (nameA > nameB) {
+            return 1
+        }
+        return 0;
     }
 
     goBack() {
@@ -148,27 +198,57 @@ class SentTransfer extends Component {
 
                 <ScrollView keyboardShouldPersistTaps='always'>
                     <View style={styles.form}>
-                        <TextInput
-                            underlineColorAndroid='rgba(0,0,0,0)'
-                            onChangeText={(text) => this.setState({
-                                name: text,
-                                invalidValue: false
-                            })}
-                            style={styles.formInput}
-                            value={this.state.name}
-                            placeholder='e-mail'>
-                        </TextInput>
 
-                        <TextInput
-                            underlineColorAndroid='rgba(0,0,0,0)'
-                            onChangeText={(text) => this.setState({
-                                pass: text,
-                                invalidValue: false
-                            })}
-                            style={styles.formInput}
-                            value={this.state.pass}
-                            placeholder='amount'>
-                        </TextInput>
+                        <View style={{backgroundColor: 'white'}}>
+                            <View style={{
+                                borderColor: 'darkblue',
+                                borderWidth: 5,
+                                marginTop: 10,
+                                margin: 0,
+                                marginBottom: 0,
+                                flex: 1,
+                            }}>
+                                <Picker style={{marginTop: 0}}
+                                        selectedValue={this.state.contact}
+
+                                        onValueChange={(value) => {
+                                            let arr = [].concat(this.state.contacts);
+                                            let contact = arr.filter((el) => el.id == value);
+                                            this.setState({
+                                                contact: value,
+                                                contactID: contact[0].id,
+                                                contactEmail: contact[0].email,
+                                                invalidValue: false
+                                            })
+                                        }}>
+
+                                    {this.state.contacts.map((item, i) =>
+                                        <Picker.Item value={item.id} label={item.email} key={i}/>
+                                    )}
+                                </Picker>
+                            </View>
+                        </View>
+                        <View style1={{
+                            flex: 1,
+                            padding: 10,
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                            marginTop: 0,
+                            marginBottom: 0,
+                            backgroundColor: 'white'
+                        }}>
+                            <TextInput
+                                underlineColorAndroid='rgba(0,0,0,0)'
+                                onChangeText={(text) => this.setState({
+                                    amount: text,
+                                    invalidValue: false
+                                })}
+                                style={styles.formInput}
+                                value={this.state.amount}
+                                placeholder='amount'>
+                            </TextInput>
+                        </View>
+
 
                         {validCtrl}
 
@@ -232,6 +312,7 @@ const styles = StyleSheet.create({
     formInput: {
         height: 50,
         marginTop: 10,
+        marginBottom: 10,
         padding: 4,
         fontSize: 18,
         borderWidth: 1,
@@ -270,7 +351,7 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
-        paddingTop: 10,
+        paddingTop: 0,
         textAlign: 'center'
     }
 });
