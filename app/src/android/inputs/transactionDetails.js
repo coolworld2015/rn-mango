@@ -29,10 +29,10 @@ class TransactionDetails extends Component {
         if (props.data) {
             this.state = {
                 id: props.data.id,
-                first_name: props.data.to.first_name,
-                last_name: props.data.to.last_name,
-                username: props.data.to.username,
-                email: props.data.to.email,
+                first_name: props.data.from.first_name,
+                last_name: props.data.from.last_name,
+                username: props.data.from.username,
+                email: props.data.from.email,
                 amount: (+props.data.value).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
                 date: props.data.date.split('T')[0] + ' ' + props.data.date.split('T')[1].split('.')[0]
             };
