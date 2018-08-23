@@ -6,11 +6,11 @@ import {
     Text,
     View,
     TouchableHighlight,
-    TouchableWithoutFeedback,
     ScrollView,
     ActivityIndicator,
     TextInput,
-    BackHandler
+    BackHandler,
+    KeyboardAvoidingView
 } from 'react-native';
 
 class AddContact extends Component {
@@ -120,6 +120,7 @@ class AddContact extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView keyboardShouldPersistTaps='always'>
+                    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
                     <View style={styles.form}>
                         <TextInput
                             underlineColorAndroid='rgba(0,0,0,0)'
@@ -192,6 +193,7 @@ class AddContact extends Component {
 
                         <Text>{this.state.bugANDROID}</Text>
                     </View>
+                    </KeyboardAvoidingView>
                 </ScrollView>
             </View>
         )
