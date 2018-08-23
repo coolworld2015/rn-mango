@@ -29,6 +29,11 @@ class App extends Component {
                 items: [],
                 item: {}
             },
+            contacts: {
+                refresh: true,
+                items: [],
+                item: {}
+            },
             phones: {
                 refresh: true,
                 items: [],

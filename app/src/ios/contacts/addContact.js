@@ -10,11 +10,10 @@ import {
     ScrollView,
     ActivityIndicator,
     TextInput,
-    Picker,
     BackHandler
 } from 'react-native';
 
-class SentTransfer extends Component {
+class AddContact extends Component {
     constructor(props) {
         super(props);
 
@@ -26,73 +25,22 @@ class SentTransfer extends Component {
         });
 
         this.state = {
-            contacts: [{email: 'Select e-mail'}],
             showProgress: false,
             bugANDROID: ''
         }
     }
 
-    componentDidMount() {
-        this.getContacts();
-    }
-
-    getContacts() {
-        this.setState({
-            serverError: false,
-            showProgressContacts: true,
-            bugANDROID: ' '
-        });
-
-        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {
-                let items = responseData.sort(this.sort);
-                items.unshift({email: 'Select e-mail'});
-                this.setState({
-                    contacts: items,
-                    serverError: false
-                });
-            })
-            .catch((error)=> {
-                this.setState({
-                    serverError: true
-                });
-                setTimeout(() => {
-                    appConfig.onLogOut();
-                }, 1000);
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgressContacts: false
-                });
-            });
-    }
-
-    sort(a, b) {
-        let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();
-        if (nameA < nameB) {
-            return -1
-        }
-        if (nameA > nameB) {
-            return 1
-        }
-        return 0;
-    }
-
     addItem() {
-        if (this.state.contact === undefined || this.state.contact === '' ||this.state.contact === 'Select e-mail' ||
-            this.state.amount === undefined || this.state.amount === '') {
-            this.setState({
-                invalidValue: true
-            });
-            return;
-        }
+         if (this.state.firstName === undefined || this.state.firstName === '' ||
+             this.state.lastName === undefined || this.state.lastName === '' ||
+             this.state.username === undefined || this.state.username === '' ||
+             this.state.email === undefined || this.state.email === '' ||
+             this.state.password === undefined || this.state.password === '') {
+             this.setState({
+                 invalidValue: true
+             });
+             return;
+         }
 
         this.setState({
             serverError: false,
@@ -100,11 +48,14 @@ class SentTransfer extends Component {
             bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'Customers/transfer?access_token='  + appConfig.access_token, {
+        fetch(appConfig.url + 'Customers?access_token='  + appConfig.access_token, {
             method: 'post',
             body: JSON.stringify({
-                recipient: this.state.contactEmail,
-                value: this.state.amount
+                first_name: this.state.firstName,
+                last_name: this.state.lastName,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password
             }),
             headers: {
                 'Accept': 'application/json',
@@ -120,8 +71,7 @@ class SentTransfer extends Component {
                     });
                 } else
                 {
-                    appConfig.balance.refresh = true;
-                    appConfig.outputs.refresh = true;
+                    appConfig.contacts.refresh = true;
                     this.props.navigator.pop();
                 }
             })
@@ -161,6 +111,7 @@ class SentTransfer extends Component {
             loader = <View style={styles.loader}>
                 <ActivityIndicator
                     size="large"
+                    color="darkblue"
                     animating={true}
                 />
             </View>;
@@ -169,47 +120,60 @@ class SentTransfer extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView keyboardShouldPersistTaps='always'>
-                    <View style={{backgroundColor: 'white'}}>
-                        <View style={{
-                            borderColor: 'darkblue',
-                            borderWidth: 5,
-                            marginTop: 10,
-                            margin: 10,
-                            marginBottom: 0,
-                            flex: 1,
-                            borderRadius: 5,
-                            height: 120
-                        }}>
-                            <Picker style={{marginTop: -53, height: 0}}
-                                    selectedValue={this.state.contact}
-
-                                    onValueChange={(value) => {
-                                        let arr = [].concat(this.state.contacts);
-                                        let contact = arr.filter((el) => el.id == value);
-                                        this.setState({
-                                            contact: value,
-                                            contactID: contact[0].id,
-                                            contactEmail: contact[0].email,
-                                            invalidValue: false
-                                        })
-                                    }}>
-
-                                {this.state.contacts.map((item, i) =>
-                                    <Picker.Item value={item.id} label={item.email} key={i}/>
-                                )}
-                            </Picker>
-                        </View>
-                    </View>
                     <View style={styles.form}>
                         <TextInput
                             underlineColorAndroid='rgba(0,0,0,0)'
                             onChangeText={(text) => this.setState({
-                                amount: text,
+                                firstName: text,
                                 invalidValue: false
                             })}
                             style={styles.formInput}
-                            value={this.state.amount}
-                            placeholder='amount'>
+                            value={this.state.firstName}
+                            placeholder='First Name'>
+                        </TextInput>
+
+                        <TextInput
+                            underlineColorAndroid='rgba(0,0,0,0)'
+                            onChangeText={(text) => this.setState({
+                                lastName: text,
+                                invalidValue: false
+                            })}
+                            style={styles.formInput}
+                            value={this.state.lastName}
+                            placeholder='Last Name'>
+                        </TextInput>
+
+                        <TextInput
+                            underlineColorAndroid='rgba(0,0,0,0)'
+                            onChangeText={(text) => this.setState({
+                                username: text,
+                                invalidValue: false
+                            })}
+                            style={styles.formInput}
+                            value={this.state.username}
+                            placeholder='User Name'>
+                        </TextInput>
+
+                        <TextInput
+                            underlineColorAndroid='rgba(0,0,0,0)'
+                            onChangeText={(text) => this.setState({
+                                email: text,
+                                invalidValue: false
+                            })}
+                            style={styles.formInput}
+                            value={this.state.email}
+                            placeholder='E-mail'>
+                        </TextInput>
+
+                        <TextInput
+                            underlineColorAndroid='rgba(0,0,0,0)'
+                            onChangeText={(text) => this.setState({
+                                password: text,
+                                invalidValue: false
+                            })}
+                            style={styles.formInput}
+                            value={this.state.password}
+                            placeholder='Password'>
                         </TextInput>
 
                         {validCtrl}
@@ -224,7 +188,7 @@ class SentTransfer extends Component {
 
                         {errorCtrl}
 
-						{loader}
+                        {loader}
 
                         <Text>{this.state.bugANDROID}</Text>
                     </View>
@@ -317,4 +281,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SentTransfer;
+export default AddContact;

@@ -42,6 +42,19 @@ class Contacts extends Component {
         this.getItems();
     }
 
+    componentWillUpdate() {
+        if (appConfig.contacts.refresh) {
+            appConfig.contacts.refresh = false;
+
+            this.setState({
+                showProgress: true,
+                resultsCount: 0
+            });
+
+            this.getItems();
+        }
+    }
+
     getItems() {
 		this.setState({
             serverError: false,

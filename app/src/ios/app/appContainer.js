@@ -14,6 +14,7 @@ import Outputs from '../outputs/outputs';
 import SentTransfer from '../outputs/sentTransfer';
 
 import Contacts from '../contacts/contacts';
+import AddContact from "../contacts/addContact";
 
 class AppContainer extends Component {
     constructor(props) {
@@ -106,11 +107,11 @@ class AppContainer extends Component {
                         initialRoute={{
                             component: Contacts,
                             title: 'Contacts',
-                            //rightButtonTitle: 'New',
+                            rightButtonTitle: 'New',
                             onRightButtonPress: () => {
-                                this.refs.customers.navigator.push({
+                                this.refs.contacts.navigator.push({
                                     title: "New record",
-                                    //component: UserAdd
+                                    component: AddContact
                                 });
                             }
                         }}
