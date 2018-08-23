@@ -86,7 +86,7 @@ class SentTransfer extends Component {
     }
 
     addItem() {
-        if (this.state.contact === undefined || this.state.contact === '' ||this.state.contact === 'Select e-mail' ||
+        if (this.state.contact === undefined || this.state.contact === '' ||this.state.contactEmail === 'Select e-mail' ||
             this.state.amount === undefined || this.state.amount === '') {
             this.setState({
                 invalidValue: true
