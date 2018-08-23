@@ -178,9 +178,9 @@ class SentTransfer extends Component {
                             marginBottom: 0,
                             flex: 1,
                             borderRadius: 5,
-                            height: 120
+                            height: 200
                         }}>
-                            <Picker style={{marginTop: -53, height: 0}}
+                            <Picker style={{marginTop: -20, height: 0}}
                                     selectedValue={this.state.contact}
 
                                     onValueChange={(value) => {
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
     },
     formInput: {
         height: 50,
-        marginTop: 10,
+        //marginTop: 10,
         padding: 4,
         fontSize: 18,
         borderWidth: 1,

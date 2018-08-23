@@ -1244,8 +1244,8 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = rnMangosoft;
-				PROVISIONING_PROFILE = "608be487-9216-45f2-bbe8-4bd7c30c0e1f";
-				PROVISIONING_PROFILE_SPECIFIER = "XC Wildcard";
+				PROVISIONING_PROFILE = "95cbcc1b-2739-4344-81b7-c9151b95ecea";
+				PROVISIONING_PROFILE_SPECIFIER = "Oleg Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
