@@ -80,7 +80,7 @@ class Contacts extends Component {
     }
 
     sort(a, b) {
-        let nameA = a.first_name.toLowerCase(), nameB = b.first_name.toLowerCase();
+        let nameA = a.username.toLowerCase(), nameB = b.username.toLowerCase();
         if (nameA < nameB) {
             return -1
         }

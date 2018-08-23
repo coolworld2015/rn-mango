@@ -42,6 +42,19 @@ class Outputs extends Component {
         this.getItems();
     }
 
+    componentWillUpdate() {
+        if (appConfig.outputs.refresh) {
+            appConfig.outputs.refresh = false;
+
+            this.setState({
+                showProgress: true,
+                resultsCount: 0
+            });
+
+            this.getItems();
+        }
+    }
+
     getItems() {
 		this.setState({
             serverError: false,

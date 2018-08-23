@@ -34,7 +34,7 @@ class AppContainer extends Component {
 
                 <TabBarIOS.Item
                     title="Balance"
-                    icon={require('../../../img/campaigns.png')}
+                    icon={require('../../../img/main.png')}
                     selected={this.state.selectedTab === 'Balance'}
                     onPress={() => this.setState({selectedTab: 'Balance'})}>
 
@@ -51,7 +51,7 @@ class AppContainer extends Component {
 
                 <TabBarIOS.Item
                     title="Received"
-                    icon={require('../../../img/transfer.png')}
+                    icon={require('../../../img/down.png')}
                     selected={this.state.selectedTab === 'Received'}
                     onPress={() => this.setState({selectedTab: 'Received'})}>
 
@@ -69,7 +69,7 @@ class AppContainer extends Component {
 
                 <TabBarIOS.Item
                     title="Send"
-                    icon={require('../../../img/phones.png')}
+                    icon={require('../../../img/up.png')}
                     selected={this.state.selectedTab === 'Send'}
                     onPress={() => this.setState({selectedTab: 'Send'})}>
 
