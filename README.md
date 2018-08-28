@@ -33,7 +33,7 @@ ANDROID for IOS
 -------------------------------------------------------------------------------------------------
 echo export "ANDROID_HOME=/Users/ed/Library/Android/sdk" >> ~/.bash_profile
 -------------------------------------------------------------------------------------------------
-export ANDROID_HOME=/Users/macmini/Library/Android/sdk
+export ANDROID_HOME=/Users/ed/Library/Android/sdk
 -------------------------------------------------------------------------------------------------
 export PATH=$PATH:$ANDROID_HOME/bin
 -------------------------------------------------------------------------------------------------
@@ -53,3 +53,11 @@ CONFIG -> android/app ->build.gradle /applicationId + versionName
 -------------------------------------------------------------------------------------------------
 NAME -> android\app\src\main\res\values\strings
 -------------------------------------------------------------------------------------------------
+Windows
+"react": "16.3.1"
+"react-native": "0.55.4"
+"babel-preset-react-native": "2.1.0"
+IOS
+"react": "16.4.1",
+"react-native": "0.56.0",
+"babel-preset-react-native": "5.0.2",	
